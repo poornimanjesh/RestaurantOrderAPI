@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurent", "ConsoleApp1\Restaurent.csproj", "{45554786-400D-4C27-BC2A-8232CFAB47FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillCalculatorAPI", "BillCalculatorAPI\BillCalculatorAPI\BillCalculatorAPI.csproj", "{7856D115-7CDE-44DF-A95D-90DB765E99E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45554786-400D-4C27-BC2A-8232CFAB47FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45554786-400D-4C27-BC2A-8232CFAB47FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45554786-400D-4C27-BC2A-8232CFAB47FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45554786-400D-4C27-BC2A-8232CFAB47FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7856D115-7CDE-44DF-A95D-90DB765E99E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7856D115-7CDE-44DF-A95D-90DB765E99E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7856D115-7CDE-44DF-A95D-90DB765E99E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7856D115-7CDE-44DF-A95D-90DB765E99E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
