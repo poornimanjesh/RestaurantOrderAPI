@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 using System.Text.Json;
 
 
@@ -7,7 +6,7 @@ namespace BillCalculatorAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurentController : ControllerBase
+    public class RestaurantController : ControllerBase
     {
         // GET: api/<RestaurentController>
         [HttpGet]
@@ -42,8 +41,10 @@ namespace BillCalculatorAPI.Controllers
 
             if (savedOrder == null)
             {
-                savedOrder = new Orders();
-                savedOrder.OrderList = new List<Order>();
+                savedOrder = new Orders
+                {
+                    OrderList = new List<Order>()
+                };
             }
 
             foreach (var order in orders.OrderList)

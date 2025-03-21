@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsoleApp1\Restaurent.csproj" />
+    <ProjectReference Include="..\..\ConsoleApp1\Restaurant.csproj" />
   </ItemGroup>
 
 </Project>
