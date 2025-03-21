@@ -32,9 +32,12 @@ namespace BillCalculatorAPI.Controllers
 
         // POST api/<RestaurentController>
         [HttpPost]
-        public Orders Post([FromBody] Orders orders)
+        public decimal Post([FromBody] Orders orders)
         {
+            System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/orders.json",string.Empty);
+
             Orders savedOrder = null;
+            decimal finalBill = 0;
             string jsonsave = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/orders.json");
 
             if(!string.IsNullOrEmpty(jsonsave))
@@ -52,13 +55,14 @@ namespace BillCalculatorAPI.Controllers
                 Restaurant restaurant = new Restaurant();
                 var total2 = Restaurant.CalculateTotal(order);
                 order.TotalPrice = total2;
+                finalBill = total2;
                 savedOrder.OrderList.Add(order);
             }
 
             var json = JsonSerializer.Serialize(savedOrder);
             var loc = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "/Orders.json", json);
-            return savedOrder;
+            return finalBill;
         }
 
         // PUT api/<RestaurentController>/5
