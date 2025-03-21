@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BillCalculatorAPI.Controllers
 {
@@ -24,8 +23,6 @@ namespace BillCalculatorAPI.Controllers
             string jsonsave = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/order.json");
 
             var savedOrder = JsonSerializer.Deserialize<Order>(jsonsave);
-
-
 
             return jsonsave;
         }
@@ -51,7 +48,6 @@ namespace BillCalculatorAPI.Controllers
 
             foreach (var order in orders.OrderList)
             {
-
                 Restaurant restaurant = new Restaurant();
                 var total2 = Restaurant.CalculateTotal(order);
                 order.TotalPrice = total2;
@@ -60,7 +56,7 @@ namespace BillCalculatorAPI.Controllers
             }
 
             var json = JsonSerializer.Serialize(savedOrder);
-            var loc = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            //var loc = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "/Orders.json", json);
             return finalBill;
         }
@@ -92,7 +88,7 @@ namespace BillCalculatorAPI.Controllers
                 orderfromDB.MenuItems.Add(orderMenuItem);
             }
 
-            if (order.IsUpdate == false)
+            if (order.IsUpdate == false)//when menu items are not updated to order
             {
                 var originalCost = orderfromDB.TotalPrice;
 

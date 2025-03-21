@@ -7,6 +7,7 @@
         foreach (var item in order.MenuItems)
         {
             decimal drinksPrice = 0;
+
             if (item.Name == "Drinks")
             {
                 drinksPrice = 0;
@@ -24,11 +25,16 @@
             }
         }
 
-        decimal serviceCharge = orderTotal / order.ServiceCharge;
+        decimal serviceCharge = GetServiceCharge(orderTotal, order.ServiceCharge);//orderTotal / order.ServiceCharge;
 
         decimal total = orderTotal + serviceCharge;
 
         return total;
+    }
+
+    private static decimal GetServiceCharge(decimal orderTotal, int serviceCharge)
+    {
+        return orderTotal / serviceCharge;
     }
 
     private static bool IsOrderEligebleForDiscount(DateTime orderHours)
