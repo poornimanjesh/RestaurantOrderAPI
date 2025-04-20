@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BillCalculatorAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurentController : ControllerBase
+    public class RestaurantController : ControllerBase
     {
         // GET: api/<RestaurentController>
         [HttpGet]
@@ -25,16 +23,17 @@ namespace BillCalculatorAPI.Controllers
 
             var savedOrder = JsonSerializer.Deserialize<Order>(jsonsave);
 
-
-
             return jsonsave;
         }
 
         // POST api/<RestaurentController>
         [HttpPost]
-        public Orders Post([FromBody] Orders orders)
+        public decimal Post([FromBody] Orders orders)
         {
+            System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "/orders.json",string.Empty);
+
             Orders savedOrder = null;
+            decimal finalBill = 0;
             string jsonsave = System.IO.File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "/orders.json");
 
             if(!string.IsNullOrEmpty(jsonsave))
@@ -42,23 +41,25 @@ namespace BillCalculatorAPI.Controllers
 
             if (savedOrder == null)
             {
-                savedOrder = new Orders();
-                savedOrder.OrderList = new List<Order>();
+                savedOrder = new Orders
+                {
+                    OrderList = new List<Order>()
+                };
             }
 
             foreach (var order in orders.OrderList)
             {
-
                 Restaurant restaurant = new Restaurant();
                 var total2 = Restaurant.CalculateTotal(order);
                 order.TotalPrice = total2;
+                finalBill = total2;
                 savedOrder.OrderList.Add(order);
             }
 
             var json = JsonSerializer.Serialize(savedOrder);
-            var loc = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            //var loc = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "/Orders.json", json);
-            return savedOrder;
+            return finalBill;
         }
 
         // PUT api/<RestaurentController>/5
@@ -88,7 +89,7 @@ namespace BillCalculatorAPI.Controllers
                 orderfromDB.MenuItems.Add(orderMenuItem);
             }
 
-            if (order.IsUpdate == false)
+            if (order.IsUpdate == false)//when menu items are not updated to order
             {
                 var originalCost = orderfromDB.TotalPrice;
 
